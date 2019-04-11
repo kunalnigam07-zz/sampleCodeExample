@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Classes;
+
+use AuthHelper;
+use OpenTok\Role;
+use OpenTok\Session;
+use OpenTok\OpenTok;
+use OpenTok\MediaMode;
+use OpenTok\ArchiveMode;
+use App\Models\Setting;
+
+class TokBox
+{
+    protected $opentok;
+
+    public function __construct($api_choice = 1)
+    {
+        $settings = Setting::find(1);
+
+        if ($api_choice == 1) {
+            $this->opentok = new OpenTok($settings->tokbox_key, $settings->tokbox_secret);
+        } elseif ($api_choice == 2) {
+            $this->opentok = new OpenTok($settings->tokbox_key_dev, $settings->tokbox_secret_dev);
+        }
+        
+        $this->my_id = AuthHelper::id();
+    }
+
+    public function createSession()
+    {
+        $options = [
+            //'archiveMode' => ArchiveMode::ALWAYS,
+            'mediaMode' => MediaMode::ROUTED
+        ];
+
+        $session = $this->opentok->createSession($options);
+
+        return $session->getSessionId();
+    }
+
+    public function generateToken($sid, $hours = 12)
+    {
+        $options = [
+            //'role' => Role::MODERATOR,
+            'expireTime' => time() + ($hours * 60 * 60)
+        ];
+
+        $token = $this->opentok->generateToken($sid, $options);
+
+        return $token;
+    }
+
+    public function startBroadcast($sid)
+    {
+        $broadcast = $this->opentok->startBroadcast($sid);
+
+        return $broadcast;
+    }
+
+    public function stopBroadcast($sid)
+    {
+        return $this->opentok->stopBroadcast($sid);
+    }
+}

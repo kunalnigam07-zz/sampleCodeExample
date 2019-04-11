@@ -1,0 +1,36 @@
+Hi Tony,
+
+
+Below are notes from my discussion with Darren in regards to the white label solution:
+
+
+The white label will be similar to what we did with ASG: many URLs to access the same system, and based on the URL serve specific content.
+ 
+The system will allow you to add multiple "skin" options in the CMS which consists primarily of a CSS file (for colours), logo, domain name and content for pages like About, email templates, etc.
+ 
+For example, if you add one for Virgin Active, we will create a red skin CSS and you'll add it along with other content in the CMS. When a person uses the domain (say www.virginlive.co.uk) it points to your system and the system then detects the domain and serves the appropriate content, CSS, etc.
+ 
+So basically the same system, skinned based on the URL accessing it.
+ 
+We would need to cater for this from a HTML and development perspective. For HTML we need Tomasz or Konrad to have a separate CSS file for colours, one we can duplicate and change for future skins. Development wise Darren needs to enable management of these extra "systems" along with content-specific items like content pages, email templates, etc.
+
+
+
+Time to implement this:
+
+
+HTML 1 day.
+ 
+Development 2 weeks.
+
+
+Note: it would be extremely time consuming to reverse engineer this feature once the site has gone live.
+
+
+Let me know what you want to do with this and the bulk purchasing as we need to factor these in if they are going ahead.
+
+
+Kind regards,
+
+
+Neil.

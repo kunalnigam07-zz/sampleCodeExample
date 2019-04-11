@@ -1,0 +1,3 @@
+http://stackoverflow.com/questions/32228176/laravel-passing-variables-from-middleware-to-controller-route
+
+http://stackoverflow.com/questions/30212390/laravel-middleware-return-variable-to-controller

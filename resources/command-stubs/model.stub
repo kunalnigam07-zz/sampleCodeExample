@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class {{class}} extends BaseModel
+{
+    use SoftDeletes;
+
+	protected $table = '{{table}}';
+    protected $dates = ['deleted_at'];
+    protected $fillable = ['title', 'ordering', 'img', 'contents', 'status'];
+}

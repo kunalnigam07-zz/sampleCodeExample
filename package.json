@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch",
+    "dev:live": "(cd ../fitswarm-live;       BUILD_DIR=`readlink -f ../fitswarm/public/static/web/js` npm run dev)",
+    "dev:switch": "(cd ../fitswarm-liveswitch; BUILD_DIR=`readlink -f ../fitswarm/public/static/web/js` npm run dev)",
+    "build": "(cd ../fitswarm-liveswitch; BUILD_DIR=`readlink -f ../fitswarm/public/static/web/js` npm run build) && (cd ../fitswarm-live; BUILD_DIR=`readlink -f ../fitswarm/public/static/web/js` npm run build)",
+    "sync": "(cd ..; .sync.sh)"
+  },
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.0",
+    "gulp": "^3.9.1",
+    "laravel-elixir": "^5.0.0",
+    "laravel-elixir-sass-compass": "^0.5.0"
+  }
+}

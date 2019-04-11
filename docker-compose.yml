@@ -1,0 +1,49 @@
+version: '3'
+services:
+  web:
+    container_name: fitswarm-http
+    build:
+      context: ./docker/web
+      dockerfile: Dockerfile
+    volumes:
+      - ./public:/var/www/public
+      - app_static_files:/var/www/public/files
+    ports:
+      - "8080:80"
+      - "8443:443"
+    depends_on:
+      - app
+    links:
+      - app
+  app:
+    container_name: fitswarm-app
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    volumes:
+      - app_static_files:/var/www/public/files
+      - ./public/static:/var/www/public/static
+      - ./resources:/var/www/resources
+    ports:
+      - 9000
+    depends_on:
+      - mysql
+    links:
+      - mysql
+  mysql:
+    container_name: fitswarm-mysql
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: fitswarm
+      MYSQL_DATABASE: fitswarm
+      MYSQL_USER: fitswarm
+      MYSQL_PASSWORD: fitswarm
+    ports:
+      - 3306
+      - "33306:3306"
+volumes:
+  db_data:
+  app_static_files:
